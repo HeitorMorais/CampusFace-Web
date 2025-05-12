@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: center;
     padding: 15px;
-    width: 300px;
+    width: 400px;
     height: auto;
     background-color: #FFFFFF;
     border-radius: 10px;
@@ -26,14 +26,39 @@
     margin-bottom: 10px;
 }
 
-.login-input{
-    width: 100%;
-    padding: 10px;
+.logo-img {
+    height: 100px;
+    width: auto;
+    margin-top: 40px;
     margin-bottom: 10px;
+  }
+
+  .input-icon-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 10px;
+    color: #000000;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+  
+  .login-input {
+    width: 100%;
+    padding: 10px 45px 10px 38px; 
     border: none;
     border-radius: 5px;
     background-color: #F2F2F2;
-}
+    box-sizing: border-box;
+  }
+  
 
 .login-span{
     font-size: 14px;

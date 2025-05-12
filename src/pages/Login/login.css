@@ -1,46 +1,71 @@
-
-.login-page{
+.login-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     background-color: #F2F2F2;
-}
-
-.login-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    width: 300px;
-    height: 300px;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-.login-title{
+  }
+  
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 420px; 
+        padding: 10px 0px;
+        height: auto;
+        background-color: #FFFFFF;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+  
+  
+  .login-title {
     font-size: 24px;
+    margin-top: 20px;
+  }
+  
+  .logo-img {
+    height: 100px;
+    width: auto;
+    margin-top: 40px;
     margin-bottom: 10px;
-}
-
-.login-input{
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #F2F2F2;
-}
-
-.login-span{
+  }
+  
+  .login-span {
     font-size: 14px;
     margin-bottom: 10px;
     color: #4d4d4d;
-}
-.login-button{
+  }
+
+  .input-icon-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 10px;
+    color: #000000;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+  
+  .login-input {
+    width: 100%;
+    padding: 10px 35px 10px 38px; 
+    border: none;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    box-sizing: border-box;
+  }
+  
+  .login-button {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -49,16 +74,17 @@
     background-color: #000000;
     color: #FFFFFF;
     cursor: pointer;
-}
-
-.register-button{
+  }
+  
+  .register-button {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
-    border:#000000 solid 1px;
+    border: #000000 solid 1px;
     border-radius: 20px;
     background-color: #FFFFFF;
     color: #000000;
     cursor: pointer;
     margin-bottom: 20px;
-}
+  }
+  
