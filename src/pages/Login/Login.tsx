@@ -15,7 +15,6 @@ function Login() {
     setIsLoading(true);
   
     try {
-      // Criar FormData para enviar como application/x-www-form-urlencoded
       const formData = new FormData();
       formData.append('username', email);
       formData.append('password', senha);
@@ -28,14 +27,12 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         
-        // Armazenar o token no localStorage
         localStorage.setItem('token', data.access_token);
         localStorage.setItem('token_type', data.token_type);
         
         console.log('Login bem-sucedido:', data);
         navigate('/dashboard');
       } else {
-        // Tentar obter detalhes do erro
         let errorData;
         try {
           errorData = await response.json();
@@ -47,7 +44,6 @@ function Login() {
         console.error('Erro de login - Dados:', errorData);
         console.error('Dados enviados:', { username: email, password: '***' });
         
-        // Tratar diferentes tipos de erro
         if (response.status === 422) {
           console.error('Dados inválidos enviados para a API');
           alert('Dados de login inválidos. Verifique o formato do email e senha.');
