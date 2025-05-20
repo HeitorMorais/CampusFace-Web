@@ -7,37 +7,63 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
   
     try {
+      // Criar FormData para enviar como application/x-www-form-urlencoded
+      const formData = new FormData();
+      formData.append('username', email);
+      formData.append('password', senha);
+
       const response = await fetch('https://campus-face.vercel.app/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: email,
-          password: senha,
-        }),
+        body: formData,
       });
   
       if (response.ok) {
         const data = await response.json();
+        
+        // Armazenar o token no localStorage
         localStorage.setItem('token', data.access_token);
+        localStorage.setItem('token_type', data.token_type);
+        
+        console.log('Login bem-sucedido:', data);
         navigate('/dashboard');
       } else {
-        const errorData = await response.json();
-        console.error('Erro de login:', errorData);
-        alert(errorData.message || 'Email ou senha incorretos');
+        // Tentar obter detalhes do erro
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch {
+          errorData = { detail: 'Erro desconhecido' };
+        }
+        
+        console.error('Erro de login - Status:', response.status);
+        console.error('Erro de login - Dados:', errorData);
+        console.error('Dados enviados:', { username: email, password: '***' });
+        
+        // Tratar diferentes tipos de erro
+        if (response.status === 422) {
+          console.error('Dados inválidos enviados para a API');
+          alert('Dados de login inválidos. Verifique o formato do email e senha.');
+        } else if (response.status === 401) {
+          alert('Email ou senha incorretos. Verifique suas credenciais.');
+        } else {
+          alert(errorData.detail || `Erro ${response.status}: ${response.statusText}`);
+        }
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
-      alert('Erro na autenticação');
+      alert('Erro de conexão. Tente novamente.');
+    } finally {
+      setIsLoading(false);
     }
   };
-  
 
   return (
     <div className="login-page">
@@ -56,6 +82,7 @@ function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
 
@@ -68,14 +95,23 @@ function Login() {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
 
-          <button className="login-button" type="submit">Entrar</button>
+          <button 
+            className="login-button" 
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Entrando...' : 'Entrar'}
+          </button>
+          
           <button
             className="register-button"
             type="button"
             onClick={() => navigate('/register')}
+            disabled={isLoading}
           >
             Não tenho uma conta
           </button>
