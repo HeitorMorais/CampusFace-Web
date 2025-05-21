@@ -31,7 +31,7 @@ function Login() {
         localStorage.setItem('token_type', data.token_type);
         
         console.log('Login bem-sucedido:', data);
-        navigate('/dashboard');
+        navigate('/dashboard/requests');
       } else {
         let errorData;
         try {

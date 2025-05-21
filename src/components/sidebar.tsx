@@ -1,16 +1,21 @@
-import send from'../assets/send.svg' 
+import send from'../assets/send.svg'
+import Send from './icons/Send'
 import group from '../assets/group.svg'
 import adminPanelSettings from '../assets/admin-panel-settings.svg'
 import settings from '../assets/settings.svg'
 
-export default function Sidebar() {
+type SideBarProps = {
+    active: string
+}
+
+export default function Sidebar(props : SideBarProps) {
     return (
         <>
         <div className='flex flex-col justify-between h-screen w-20 p-4 bg-[#1C1B1F]'>
             <div className='grid gap-4'>
-                <img src={send} alt="" />
-                <img src={group} alt="" />
-                <img src={adminPanelSettings} alt="" />
+                <a href="/dashboard/requests"><Send color={`${props.active == "Requests" ? "#FFF" : "#BDBDBD"}`}/></a>
+                <a href="/dashboard/members"><img src={group} alt="" /></a>
+               <a href="/dashboard/verifiers"><img src={adminPanelSettings} alt="" /></a> 
                 
             </div>
             <div>
